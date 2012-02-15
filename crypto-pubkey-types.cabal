@@ -1,5 +1,5 @@
 Name:                crypto-pubkey-types
-Version:             0.1.0
+Version:             0.1.1
 Description:         Generic cryptography public keys algorithm types
 License:             BSD3
 License-file:        LICENSE
