@@ -1,3 +1,4 @@
+{-# LANGUAGE DeriveDataTypeable #-}
 -- |
 -- Module      : Crypto.Types.PubKey.DSA
 -- License     : BSD-style
@@ -12,6 +13,8 @@ module Crypto.Types.PubKey.DSA
 	, PrivateKey(..)
 	) where
 
+import Data.Data
+
 -- | Represent DSA parameters namely P, G, and Q.
 type Params = (Integer,Integer,Integer)
 
@@ -22,7 +25,7 @@ type Signature = (Integer,Integer)
 data PublicKey = PublicKey
 	{ public_params :: Params   -- ^ DSA parameters
 	, public_y      :: Integer  -- ^ DSA public Y
-	} deriving (Show,Read,Eq)
+	} deriving (Show,Read,Eq,Data,Typeable)
 
 -- | Represent a DSA private key.
 --
@@ -31,4 +34,4 @@ data PublicKey = PublicKey
 data PrivateKey = PrivateKey
 	{ private_params :: Params   -- ^ DSA parameters
 	, private_x      :: Integer  -- ^ DSA private X
-	} deriving (Show,Read,Eq)
+	} deriving (Show,Read,Eq,Data,Typeable)

@@ -1,3 +1,4 @@
+{-# LANGUAGE DeriveDataTypeable #-}
 -- |
 -- Module      : Crypto.Types.PubKey.RSA
 -- License     : BSD-style
@@ -10,12 +11,14 @@ module Crypto.Types.PubKey.RSA
 	, PrivateKey(..)
 	) where
 
+import Data.Data
+
 -- | Represent a RSA public key
 data PublicKey = PublicKey
 	{ public_size :: Int      -- ^ size of key in bytes
 	, public_n    :: Integer  -- ^ public p*q
 	, public_e    :: Integer  -- ^ public exponant e
-	} deriving (Show,Read,Eq)
+	} deriving (Show,Read,Eq,Data,Typeable)
 
 -- | Represent a RSA private key.
 -- 
@@ -36,4 +39,4 @@ data PrivateKey = PrivateKey
 	, private_dP   :: Integer -- ^ d mod (p-1)
 	, private_dQ   :: Integer -- ^ d mod (q-1)
 	, private_qinv :: Integer -- ^ q^(-1) mod p
-	} deriving (Show,Read,Eq)
+	} deriving (Show,Read,Eq,Data,Typeable)
