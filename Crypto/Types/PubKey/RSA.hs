@@ -9,6 +9,8 @@
 module Crypto.Types.PubKey.RSA
     ( PublicKey(..)
     , PrivateKey(..)
+    , private_size
+    , private_n
     ) where
 
 import Data.Data
@@ -22,7 +24,7 @@ data PublicKey = PublicKey
 
 -- | Represent a RSA private key.
 -- 
--- Only the sz, n and d fields are mandatory to fill.
+-- Only the pub, d fields are mandatory to fill.
 --
 -- p, q, dP, dQ, qinv are by-product during RSA generation,
 -- but are useful to record here to speed up massively
@@ -31,12 +33,15 @@ data PublicKey = PublicKey
 -- implementations can leave optional fields to 0.
 --
 data PrivateKey = PrivateKey
-    { private_size :: Int     -- ^ size of key in bytes
-    , private_n    :: Integer -- ^ private p*q
-    , private_d    :: Integer -- ^ private exponant d
-    , private_p    :: Integer -- ^ p prime number
-    , private_q    :: Integer -- ^ q prime number
-    , private_dP   :: Integer -- ^ d mod (p-1)
-    , private_dQ   :: Integer -- ^ d mod (q-1)
-    , private_qinv :: Integer -- ^ q^(-1) mod p
+    { private_pub  :: PublicKey -- ^ public part of a private key (size, n and e)
+    , private_d    :: Integer   -- ^ private exponant d
+    , private_p    :: Integer   -- ^ p prime number
+    , private_q    :: Integer   -- ^ q prime number
+    , private_dP   :: Integer   -- ^ d mod (p-1)
+    , private_dQ   :: Integer   -- ^ d mod (q-1)
+    , private_qinv :: Integer   -- ^ q^(-1) mod p
     } deriving (Show,Read,Eq,Data,Typeable)
+
+private_size = public_size . private_pub
+private_n    = public_n . private_pub
+private_e    = public_e . private_pub
