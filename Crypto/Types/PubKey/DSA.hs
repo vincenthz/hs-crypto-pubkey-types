@@ -25,7 +25,7 @@ type Signature = (Integer,Integer)
 data PublicKey = PublicKey
     { public_params :: Params   -- ^ DSA parameters
     , public_y      :: Integer  -- ^ DSA public Y
-    } deriving (Show,Read,Eq,Data,Typeable)
+    } deriving (Show,Read,Eq,Ord,Data,Typeable)
 
 -- | Represent a DSA private key.
 --
@@ -34,4 +34,4 @@ data PublicKey = PublicKey
 data PrivateKey = PrivateKey
     { private_params :: Params   -- ^ DSA parameters
     , private_x      :: Integer  -- ^ DSA private X
-    } deriving (Show,Read,Eq,Data,Typeable)
+    } deriving (Show,Read,Eq,Ord,Data,Typeable)

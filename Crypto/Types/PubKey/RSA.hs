@@ -20,10 +20,10 @@ data PublicKey = PublicKey
     { public_size :: Int      -- ^ size of key in bytes
     , public_n    :: Integer  -- ^ public p*q
     , public_e    :: Integer  -- ^ public exponant e
-    } deriving (Show,Read,Eq,Data,Typeable)
+    } deriving (Show,Read,Eq,Ord,Data,Typeable)
 
 -- | Represent a RSA private key.
--- 
+--
 -- Only the pub, d fields are mandatory to fill.
 --
 -- p, q, dP, dQ, qinv are by-product during RSA generation,
@@ -40,7 +40,7 @@ data PrivateKey = PrivateKey
     , private_dP   :: Integer   -- ^ d mod (p-1)
     , private_dQ   :: Integer   -- ^ d mod (q-1)
     , private_qinv :: Integer   -- ^ q^(-1) mod p
-    } deriving (Show,Read,Eq,Data,Typeable)
+    } deriving (Show,Read,Eq,Ord,Data,Typeable)
 
 private_size = public_size . private_pub
 private_n    = public_n . private_pub
