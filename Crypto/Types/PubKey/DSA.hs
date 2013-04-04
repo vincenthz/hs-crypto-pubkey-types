@@ -9,11 +9,16 @@
 module Crypto.Types.PubKey.DSA
     ( Params(..)
     , Signature
+    , PublicNumber
     , PublicKey(..)
+    , PrivateNumber
     , PrivateKey(..)
     ) where
 
 import Data.Data
+
+type PublicNumber = Integer
+type PrivateNumber = Integer
 
 -- | Represent DSA parameters namely P, G, and Q.
 data Params = Params
@@ -27,8 +32,8 @@ type Signature = (Integer,Integer)
 
 -- | Represent a DSA public key.
 data PublicKey = PublicKey
-    { public_params :: Params   -- ^ DSA parameters
-    , public_y      :: Integer  -- ^ DSA public Y
+    { public_params :: Params       -- ^ DSA parameters
+    , public_y      :: PublicNumber -- ^ DSA public Y
     } deriving (Show,Read,Eq,Data,Typeable)
 
 -- | Represent a DSA private key.
@@ -36,6 +41,6 @@ data PublicKey = PublicKey
 -- Only x need to be secret.
 -- the DSA parameters are publicly shared with the other side.
 data PrivateKey = PrivateKey
-    { private_params :: Params   -- ^ DSA parameters
-    , private_x      :: Integer  -- ^ DSA private X
+    { private_params :: Params        -- ^ DSA parameters
+    , private_x      :: PrivateNumber -- ^ DSA private X
     } deriving (Show,Read,Eq,Data,Typeable)
