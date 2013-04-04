@@ -7,7 +7,7 @@
 -- Portability : Excellent
 --
 module Crypto.Types.PubKey.DSA
-    ( Params
+    ( Params(..)
     , Signature
     , PublicKey(..)
     , PrivateKey(..)
@@ -16,7 +16,11 @@ module Crypto.Types.PubKey.DSA
 import Data.Data
 
 -- | Represent DSA parameters namely P, G, and Q.
-type Params = (Integer,Integer,Integer)
+data Params = Params
+    { params_p :: Integer
+    , params_g :: Integer
+    , params_q :: Integer
+    } deriving (Show,Read,Eq,Data,Typeable)
 
 -- | Represent a DSA signature namely R and S.
 type Signature = (Integer,Integer)
