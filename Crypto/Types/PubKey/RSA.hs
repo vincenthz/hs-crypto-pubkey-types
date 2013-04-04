@@ -9,8 +9,11 @@
 module Crypto.Types.PubKey.RSA
     ( PublicKey(..)
     , PrivateKey(..)
+    , KeyPair(..)
     , private_size
     , private_n
+    , toPublicKey
+    , toPrivateKey
     ) where
 
 import Data.Data
@@ -45,3 +48,17 @@ data PrivateKey = PrivateKey
 private_size = public_size . private_pub
 private_n    = public_n . private_pub
 private_e    = public_e . private_pub
+
+-- | Represent RSA KeyPair
+--
+-- note the RSA private key contains already an instance of public key for efficiency
+newtype KeyPair = KeyPair PrivateKey
+    deriving (Show,Read,Eq,Data,Typeable)
+
+-- | Public key of a RSA KeyPair
+toPublicKey :: KeyPair -> PublicKey
+toPublicKey (KeyPair priv) = private_pub priv
+
+-- | Private key of a RSA KeyPair
+toPrivateKey :: KeyPair -> PrivateKey
+toPrivateKey (KeyPair priv) = priv

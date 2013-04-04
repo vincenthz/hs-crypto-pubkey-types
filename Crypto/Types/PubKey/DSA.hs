@@ -13,6 +13,9 @@ module Crypto.Types.PubKey.DSA
     , PublicKey(..)
     , PrivateNumber
     , PrivateKey(..)
+    , KeyPair(..)
+    , toPublicKey
+    , toPrivateKey
     ) where
 
 import Data.Data
@@ -44,3 +47,15 @@ data PrivateKey = PrivateKey
     { private_params :: Params        -- ^ DSA parameters
     , private_x      :: PrivateNumber -- ^ DSA private X
     } deriving (Show,Read,Eq,Data,Typeable)
+
+-- | Represent a DSA key pair
+data KeyPair = KeyPair Params PublicNumber PrivateNumber
+    deriving (Show,Read,Eq,Data,Typeable)
+
+-- | Public key of a DSA Key pair
+toPublicKey :: KeyPair -> PublicKey
+toPublicKey (KeyPair params pub _) = PublicKey params pub
+
+-- | Private key of a DSA Key pair
+toPrivateKey :: KeyPair -> PrivateKey
+toPrivateKey (KeyPair params _ priv) = PrivateKey params priv
