@@ -1,4 +1,5 @@
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE DeriveDataTypeable #-}
 -- |
 -- Module      : Crypto.Types.PubKey.DH
 -- License     : BSD-style
@@ -7,14 +8,19 @@
 -- Portability : Excellent
 --
 module Crypto.Types.PubKey.DH
-    ( Params
+    ( Params(..)
     , PublicNumber(..)
     , PrivateNumber(..)
     , SharedKey(..)
     ) where
 
+import Data.Data
+
 -- | Represent Diffie Hellman parameters namely P (prime), and G (generator).
-type Params = (Integer,Integer)
+data Params = Params
+    { param_p :: Integer
+    , param_g :: Integer
+    } deriving (Show,Read,Eq,Data,Typeable)
 
 -- | Represent Diffie Hellman public number Y.
 newtype PublicNumber = PublicNumber Integer
