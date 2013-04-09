@@ -21,14 +21,17 @@ module Crypto.Types.PubKey.DSA
 import Data.Data
 import Data.ASN1.Types
 
+-- | DSA Public Number, usually embedded in DSA Public Key
 type PublicNumber = Integer
+
+-- | DSA Private Number, usually embedded in DSA Private Key
 type PrivateNumber = Integer
 
 -- | Represent DSA parameters namely P, G, and Q.
 data Params = Params
-    { params_p :: Integer
-    , params_g :: Integer
-    , params_q :: Integer
+    { params_p :: Integer -- ^ DSA p
+    , params_g :: Integer -- ^ DSA g
+    , params_q :: Integer -- ^ DSA q
     } deriving (Show,Read,Eq,Data,Typeable)
 
 instance ASN1Object Params where
