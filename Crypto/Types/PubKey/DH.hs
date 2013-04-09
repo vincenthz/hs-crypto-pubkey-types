@@ -18,8 +18,8 @@ import Data.Data
 
 -- | Represent Diffie Hellman parameters namely P (prime), and G (generator).
 data Params = Params
-    { param_p :: Integer
-    , param_g :: Integer
+    { params_p :: Integer
+    , params_g :: Integer
     } deriving (Show,Read,Eq,Data,Typeable)
 
 -- | Represent Diffie Hellman public number Y.
