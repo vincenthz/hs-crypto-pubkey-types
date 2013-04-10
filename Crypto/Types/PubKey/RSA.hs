@@ -116,7 +116,7 @@ newtype KeyPair = KeyPair PrivateKey
 
 instance ASN1Object KeyPair where
     toASN1 (KeyPair pkey) = toASN1 pkey
-    fromASN1 = fmap (\(k,s) -> (KeyPair k, s)) . fromASN1
+    fromASN1 = either Left (\(k,s) -> Right (KeyPair k, s)) . fromASN1
 
 -- | Public key of a RSA KeyPair
 toPublicKey :: KeyPair -> PublicKey
