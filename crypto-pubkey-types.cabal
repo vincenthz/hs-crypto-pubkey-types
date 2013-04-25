@@ -17,6 +17,7 @@ Library
                      Crypto.Types.PubKey.DSA
                      Crypto.Types.PubKey.DH
                      Crypto.Types.PubKey.ECC
+                     Crypto.Types.PubKey.ECDSA
   Build-depends:     base >= 4 && < 5
                    , asn1-types >= 0.1 && < 0.2
 
