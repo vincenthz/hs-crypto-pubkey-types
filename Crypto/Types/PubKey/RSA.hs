@@ -62,8 +62,13 @@ data PrivateKey = PrivateKey
     , private_qinv :: Integer   -- ^ q^(-1) mod p
     } deriving (Show,Read,Eq,Data,Typeable)
 
+-- | get the size in bytes from a private key
 private_size = public_size . private_pub
+
+-- | get n from a private key
 private_n    = public_n . private_pub
+
+-- | get e from a private key
 private_e    = public_e . private_pub
 
 instance ASN1Object PrivateKey where
