@@ -79,24 +79,24 @@ data CurveName =
     | SEC_p256r1
     | SEC_p384r1
     | SEC_p521r1 
-	| SEC_t113r1
-	| SEC_t113r2
-	| SEC_t131r1
-	| SEC_t131r2
-	| SEC_t163k1
-	| SEC_t163r1
-	| SEC_t163r2
-	| SEC_t193r1
-	| SEC_t193r2
-	| SEC_t233k1
-	| SEC_t233r1
-	| SEC_t239k1
-	| SEC_t283k1
-	| SEC_t283r1
-	| SEC_t409k1
-	| SEC_t409r1
-	| SEC_t571k1
-	| SEC_t571r1
+    | SEC_t113r1
+    | SEC_t113r2
+    | SEC_t131r1
+    | SEC_t131r2
+    | SEC_t163k1
+    | SEC_t163r1
+    | SEC_t163r2
+    | SEC_t193r1
+    | SEC_t193r2
+    | SEC_t233k1
+    | SEC_t233r1
+    | SEC_t239k1
+    | SEC_t283k1
+    | SEC_t283r1
+    | SEC_t409k1
+    | SEC_t409r1
+    | SEC_t571k1
+    | SEC_t571r1
     deriving (Show,Eq,Ord)
 
 -- | get the curve definition associated with a recommended known curve name.
