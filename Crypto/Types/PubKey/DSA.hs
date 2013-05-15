@@ -8,7 +8,7 @@
 --
 module Crypto.Types.PubKey.DSA
     ( Params(..)
-    , Signature
+    , Signature(..)
     , PublicNumber
     , PublicKey(..)
     , PrivateNumber
@@ -46,7 +46,20 @@ instance ASN1Object Params where
     fromASN1 _ = Left "fromASN1: DSA.Params: unexpected format"
 
 -- | Represent a DSA signature namely R and S.
-type Signature = (Integer,Integer)
+data Signature = Signature
+    { sign_r :: Integer -- ^ DSA r
+    , sign_s :: Integer -- ^ DSA s
+    } deriving (Show,Read,Eq,Data,Typeable)
+
+instance ASN1Object Signature where
+    toASN1 sign = \xs -> Start Sequence
+                         : IntVal (sign_r sign)
+                         : IntVal (sign_s sign)
+                         : End Sequence
+                         : xs
+    fromASN1 (Start Sequence:IntVal r:IntVal s:End Sequence:xs) =
+        Right (Signature { sign_r = r, sign_s = s }, xs)
+    fromASN1 _ = Left "fromASN1: DSA.Signature: unexpected format"
 
 -- | Represent a DSA public key.
 data PublicKey = PublicKey
