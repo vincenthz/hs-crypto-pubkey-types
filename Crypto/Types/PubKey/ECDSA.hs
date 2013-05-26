@@ -7,7 +7,8 @@
 -- Portability : Excellent
 --
 module Crypto.Types.PubKey.ECDSA
-    ( PrivateNumber
+    ( Signature(..)
+    , PrivateNumber
     , PrivateKey(..)
     , PublicKey(..)
     ) where
@@ -17,6 +18,12 @@ import Data.Data
 
 -- | ECDSA Private Number, usually embedded in ECDSA Private Key
 type PrivateNumber = Integer
+
+-- | Represent a ECDSA signature namely R and S.
+data Signature = Signature
+    { sign_r :: Integer -- ^ ECDSA r
+    , sign_s :: Integer -- ^ ECDSA s
+    } deriving (Show,Read,Eq,Data,Typeable)
 
 -- | ECDSA Private Key
 data PrivateKey = PrivateKey
