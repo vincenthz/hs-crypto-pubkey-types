@@ -22,7 +22,7 @@ module Crypto.Types.PubKey.ECC
 import Data.Data
 
 -- | Define either a binary curve or a prime curve.
-data Curve = CurveF2M CurveBinary -- ^ 𝔽(2^m)
+data Curve = CurveF2m CurveBinary -- ^ 𝔽(2^m)
            | CurveFP  CurvePrime  -- ^ 𝔽p
            deriving (Show,Read,Eq,Data,Typeable)
 
@@ -230,7 +230,7 @@ getCurveByName SEC_p521r1 = CurveFP  $ CurvePrime
         , ecc_n = 0x01fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffa51868783bf2f966b7fcc0148f709a5d03bb5c9b8899c47aebb6fb71e91386409
         , ecc_h = 1
         })
-getCurveByName SEC_t113r1 = CurveF2M $ CurveBinary
+getCurveByName SEC_t113r1 = CurveF2m $ CurveBinary
     0x020000000000000000000000000201
     (CurveCommon
         { ecc_a = 0x003088250ca6e7c7fe649ce85820f7
@@ -240,7 +240,7 @@ getCurveByName SEC_t113r1 = CurveF2M $ CurveBinary
         , ecc_n = 0x0100000000000000d9ccec8a39e56f
         , ecc_h = 2
         })
-getCurveByName SEC_t113r2 = CurveF2M $ CurveBinary
+getCurveByName SEC_t113r2 = CurveF2m $ CurveBinary
     0x020000000000000000000000000201
     (CurveCommon
         { ecc_a = 0x00689918dbec7e5a0dd6dfc0aa55c7
@@ -250,7 +250,7 @@ getCurveByName SEC_t113r2 = CurveF2M $ CurveBinary
         , ecc_n = 0x010000000000000108789b2496af93
         , ecc_h = 2
         })
-getCurveByName SEC_t131r1 = CurveF2M $ CurveBinary
+getCurveByName SEC_t131r1 = CurveF2m $ CurveBinary
     0x080000000000000000000000000000010d
     (CurveCommon
         { ecc_a = 0x07a11b09a76b562144418ff3ff8c2570b8
@@ -260,7 +260,7 @@ getCurveByName SEC_t131r1 = CurveF2M $ CurveBinary
         , ecc_n = 0x0400000000000000023123953a9464b54d
         , ecc_h = 2
         })
-getCurveByName SEC_t131r2 = CurveF2M $ CurveBinary
+getCurveByName SEC_t131r2 = CurveF2m $ CurveBinary
     0x080000000000000000000000000000010d
     (CurveCommon
         { ecc_a = 0x03e5a88919d7cafcbf415f07c2176573b2
@@ -270,7 +270,7 @@ getCurveByName SEC_t131r2 = CurveF2M $ CurveBinary
         , ecc_n = 0x0400000000000000016954a233049ba98f
         , ecc_h = 2
         })
-getCurveByName SEC_t163k1 = CurveF2M $ CurveBinary
+getCurveByName SEC_t163k1 = CurveF2m $ CurveBinary
     0x0800000000000000000000000000000000000000c9
     (CurveCommon
         { ecc_a = 0x000000000000000000000000000000000000000001
@@ -280,7 +280,7 @@ getCurveByName SEC_t163k1 = CurveF2M $ CurveBinary
         , ecc_n = 0x04000000000000000000020108a2e0cc0d99f8a5ef
         , ecc_h = 2
         })
-getCurveByName SEC_t163r1 = CurveF2M $ CurveBinary
+getCurveByName SEC_t163r1 = CurveF2m $ CurveBinary
     0x0800000000000000000000000000000000000000c9
     (CurveCommon
         { ecc_a = 0x07b6882caaefa84f9554ff8428bd88e246d2782ae2
@@ -290,7 +290,7 @@ getCurveByName SEC_t163r1 = CurveF2M $ CurveBinary
         , ecc_n = 0x03ffffffffffffffffffff48aab689c29ca710279b
         , ecc_h = 2
         })
-getCurveByName SEC_t163r2 = CurveF2M $ CurveBinary
+getCurveByName SEC_t163r2 = CurveF2m $ CurveBinary
     0x0800000000000000000000000000000000000000c9
     (CurveCommon
         { ecc_a = 0x000000000000000000000000000000000000000001
@@ -300,7 +300,7 @@ getCurveByName SEC_t163r2 = CurveF2M $ CurveBinary
         , ecc_n = 0x040000000000000000000292fe77e70c12a4234c33
         , ecc_h = 2
         })
-getCurveByName SEC_t193r1 = CurveF2M $ CurveBinary
+getCurveByName SEC_t193r1 = CurveF2m $ CurveBinary
     0x02000000000000000000000000000000000000000000008001
     (CurveCommon
         { ecc_a = 0x0017858feb7a98975169e171f77b4087de098ac8a911df7b01
@@ -310,7 +310,7 @@ getCurveByName SEC_t193r1 = CurveF2M $ CurveBinary
         , ecc_n = 0x01000000000000000000000000c7f34a778f443acc920eba49
         , ecc_h = 2
         })
-getCurveByName SEC_t193r2 = CurveF2M $ CurveBinary
+getCurveByName SEC_t193r2 = CurveF2m $ CurveBinary
     0x02000000000000000000000000000000000000000000008001
     (CurveCommon
         { ecc_a = 0x0163f35a5137c2ce3ea6ed8667190b0bc43ecd69977702709b
@@ -320,7 +320,7 @@ getCurveByName SEC_t193r2 = CurveF2M $ CurveBinary
         , ecc_n = 0x010000000000000000000000015aab561b005413ccd4ee99d5
         , ecc_h = 2
         })
-getCurveByName SEC_t233k1 = CurveF2M $ CurveBinary
+getCurveByName SEC_t233k1 = CurveF2m $ CurveBinary
     0x020000000000000000000000000000000000000004000000000000000001
     (CurveCommon
         { ecc_a = 0x000000000000000000000000000000000000000000000000000000000000
@@ -330,7 +330,7 @@ getCurveByName SEC_t233k1 = CurveF2M $ CurveBinary
         , ecc_n = 0x008000000000000000000000000000069d5bb915bcd46efb1ad5f173abdf
         , ecc_h = 4
         })
-getCurveByName SEC_t233r1 = CurveF2M $ CurveBinary
+getCurveByName SEC_t233r1 = CurveF2m $ CurveBinary
     0x020000000000000000000000000000000000000004000000000000000001
     (CurveCommon
         { ecc_a = 0x000000000000000000000000000000000000000000000000000000000001
@@ -340,7 +340,7 @@ getCurveByName SEC_t233r1 = CurveF2M $ CurveBinary
         , ecc_n = 0x01000000000000000000000000000013e974e72f8a6922031d2603cfe0d7
         , ecc_h = 2
         })
-getCurveByName SEC_t239k1 = CurveF2M $ CurveBinary
+getCurveByName SEC_t239k1 = CurveF2m $ CurveBinary
     0x800000000000000000004000000000000000000000000000000000000001
     (CurveCommon
         { ecc_a = 0x000000000000000000000000000000000000000000000000000000000000
@@ -350,7 +350,7 @@ getCurveByName SEC_t239k1 = CurveF2M $ CurveBinary
         , ecc_n = 0x2000000000000000000000000000005a79fec67cb6e91f1c1da800e478a5
         , ecc_h = 4
         })
-getCurveByName SEC_t283k1 = CurveF2M $ CurveBinary
+getCurveByName SEC_t283k1 = CurveF2m $ CurveBinary
     0x0800000000000000000000000000000000000000000000000000000000000000000010a1
     (CurveCommon
         { ecc_a = 0x000000000000000000000000000000000000000000000000000000000000000000000000
@@ -360,7 +360,7 @@ getCurveByName SEC_t283k1 = CurveF2M $ CurveBinary
         , ecc_n = 0x01ffffffffffffffffffffffffffffffffffe9ae2ed07577265dff7f94451e061e163c61
         , ecc_h = 4
         })
-getCurveByName SEC_t283r1 = CurveF2M $ CurveBinary
+getCurveByName SEC_t283r1 = CurveF2m $ CurveBinary
     0x0800000000000000000000000000000000000000000000000000000000000000000010a1
     (CurveCommon
         { ecc_a = 0x000000000000000000000000000000000000000000000000000000000000000000000001
@@ -370,7 +370,7 @@ getCurveByName SEC_t283r1 = CurveF2M $ CurveBinary
         , ecc_n = 0x03ffffffffffffffffffffffffffffffffffef90399660fc938a90165b042a7cefadb307
         , ecc_h = 2
         })
-getCurveByName SEC_t409k1 = CurveF2M $ CurveBinary
+getCurveByName SEC_t409k1 = CurveF2m $ CurveBinary
     0x02000000000000000000000000000000000000000000000000000000000000000000000000000000008000000000000000000001
     (CurveCommon
         { ecc_a = 0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
@@ -380,7 +380,7 @@ getCurveByName SEC_t409k1 = CurveF2M $ CurveBinary
         , ecc_n = 0x007ffffffffffffffffffffffffffffffffffffffffffffffffffe5f83b2d4ea20400ec4557d5ed3e3e7ca5b4b5c83b8e01e5fcf
         , ecc_h = 4
         })
-getCurveByName SEC_t409r1 = CurveF2M $ CurveBinary
+getCurveByName SEC_t409r1 = CurveF2m $ CurveBinary
     0x02000000000000000000000000000000000000000000000000000000000000000000000000000000008000000000000000000001
     (CurveCommon
         { ecc_a = 0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001
@@ -390,7 +390,7 @@ getCurveByName SEC_t409r1 = CurveF2M $ CurveBinary
         , ecc_n = 0x010000000000000000000000000000000000000000000000000001e2aad6a612f33307be5fa47c3c9e052f838164cd37d9a21173
         , ecc_h = 2
         })
-getCurveByName SEC_t571k1 = CurveF2M $ CurveBinary
+getCurveByName SEC_t571k1 = CurveF2m $ CurveBinary
     0x080000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000425
     (CurveCommon
         { ecc_a = 0x000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
@@ -400,7 +400,7 @@ getCurveByName SEC_t571k1 = CurveF2M $ CurveBinary
         , ecc_n = 0x020000000000000000000000000000000000000000000000000000000000000000000000131850e1f19a63e4b391a8db917f4138b630d84be5d639381e91deb45cfe778f637c1001
         , ecc_h = 4
         })
-getCurveByName SEC_t571r1 = CurveF2M $ CurveBinary
+getCurveByName SEC_t571r1 = CurveF2m $ CurveBinary
     0x080000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000425
     (CurveCommon
         { ecc_a = 0x000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001
