@@ -11,6 +11,7 @@ module Crypto.Types.PubKey.ECC
     , Point(..)
     , CurveBinary(..)
     , CurvePrime(..)
+    , common_curve
     , ecc_fx
     , ecc_p
     , CurveCommon(..)
@@ -42,6 +43,10 @@ data CurveBinary = CurveBinary Integer CurveCommon
 -- the first parameter is a prime number
 data CurvePrime = CurvePrime Integer CurveCommon
     deriving (Show,Read,Eq,Data,Typeable)
+
+common_curve :: Curve -> CurveCommon
+common_curve (CurveF2m (CurveBinary _ cc)) = cc
+common_curve (CurveFP  (CurvePrime  _ cc)) = cc
 
 -- | Polynomial representing the characteristic of a CurveBinary.
 ecc_fx :: CurveBinary -> Integer
