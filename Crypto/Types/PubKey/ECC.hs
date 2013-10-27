@@ -101,7 +101,7 @@ data CurveName =
     | SEC_t409r1
     | SEC_t571k1
     | SEC_t571r1
-    deriving (Show,Eq,Ord)
+    deriving (Show,Eq,Ord,Enum)
 
 -- | get the curve definition associated with a recommended known curve name.
 getCurveByName :: CurveName -> Curve
