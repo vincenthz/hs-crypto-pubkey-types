@@ -185,6 +185,16 @@ getCurveByName SEC_p192k1 = CurveFP  $ CurvePrime
         , ecc_n = 0xfffffffffffffffffffffffe26f2fc170f69466a74defd8d
         , ecc_h = 1
         })
+getCurveByName SEC_p192r1 = CurveFP  $ CurvePrime
+    0xfffffffffffffffffffffffffffffffeffffffffffffffff
+    (CurveCommon
+        { ecc_a = 0xfffffffffffffffffffffffffffffffefffffffffffffffc
+        , ecc_b = 0x64210519e59c80e70fa7e9ab72243049feb8deecc146b9b1
+        , ecc_g = Point 0x188da80eb03090f67cbf20eb43a18800f4ff0afd82ff1012
+                        0x07192b95ffc8da78631011ed6b24cdd573f977a11e794811
+        , ecc_n = 0xffffffffffffffffffffffff99def836146bc9b1b4d22831
+        , ecc_h = 1
+        })
 getCurveByName SEC_p224k1 = CurveFP  $ CurvePrime
     0x00fffffffffffffffffffffffffffffffffffffffffffffffeffffe56d
     (CurveCommon
@@ -213,6 +223,16 @@ getCurveByName SEC_p256k1 = CurveFP  $ CurvePrime
         , ecc_g = Point 0x79be667ef9dcbbac55a06295ce870b07029bfcdb2dce28d959f2815b16f81798
                         0x483ada7726a3c4655da4fbfc0e1108a8fd17b448a68554199c47d08ffb10d4b8
         , ecc_n = 0xfffffffffffffffffffffffffffffffebaaedce6af48a03bbfd25e8cd0364141
+        , ecc_h = 1
+        })
+getCurveByName SEC_p256r1 = CurveFP  $ CurvePrime
+    0xffffffff00000001000000000000000000000000ffffffffffffffffffffffff
+    (CurveCommon
+        { ecc_a = 0xffffffff00000001000000000000000000000000fffffffffffffffffffffffc
+        , ecc_b = 0x5ac635d8aa3a93e7b3ebbd55769886bc651d06b0cc53b0f63bce3c3e27d2604b
+        , ecc_g = Point 0x6b17d1f2e12c4247f8bce6e563a440f277037d812deb33a0f4a13945d898c296
+                        0x4fe342e2fe1a7f9b8ee7eb4a7c0f9e162bce33576b315ececbb6406837bf51f5
+        , ecc_n = 0xffffffff00000000ffffffffffffffffbce6faada7179e84f3b9cac2fc632551
         , ecc_h = 1
         })
 getCurveByName SEC_p384r1 = CurveFP  $ CurvePrime
