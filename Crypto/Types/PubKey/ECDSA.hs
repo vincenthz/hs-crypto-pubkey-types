@@ -20,10 +20,10 @@ module Crypto.Types.PubKey.ECDSA
 import Crypto.Types.PubKey.ECC
 import Data.Data
 
--- | ECDSA Public Point, usually embedded in ECDSA Public Key
+-- | ECDSA Public Point, usually embedded in ECDSA Public Key.
 type PublicPoint = Point
 
--- | ECDSA Private Number, usually embedded in ECDSA Private Key
+-- | ECDSA Private Number, usually embedded in ECDSA Private Key.
 type PrivateNumber = Integer
 
 -- | Represent a ECDSA signature namely R and S.
@@ -32,13 +32,13 @@ data Signature = Signature
     , sign_s :: Integer -- ^ ECDSA s
     } deriving (Show,Read,Eq,Data,Typeable)
 
--- | ECDSA Private Key
+-- | ECDSA Private Key.
 data PrivateKey = PrivateKey
     { private_curve :: Curve
     , private_d     :: PrivateNumber
     } deriving (Show,Read,Eq,Data,Typeable)
 
--- | ECDSA Public Key
+-- | ECDSA Public Key.
 data PublicKey = PublicKey
     { public_curve :: Curve
     , public_q     :: PublicPoint
@@ -47,10 +47,10 @@ data PublicKey = PublicKey
 data KeyPair = KeyPair Curve PublicPoint PrivateNumber
     deriving (Show,Read,Eq,Data,Typeable)
 
--- | Public key of a ECDSA Key pair
+-- | Public key of a ECDSA Key pair.
 toPublicKey :: KeyPair -> PublicKey
 toPublicKey (KeyPair curve pub _) = PublicKey curve pub
 
--- | Private key of a ECDSA Key pair
+-- | Private key of a ECDSA Key pair.
 toPrivateKey :: KeyPair -> PrivateKey
 toPrivateKey (KeyPair curve _ priv) = PrivateKey curve priv

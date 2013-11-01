@@ -27,28 +27,27 @@ data Curve = CurveF2m CurveBinary -- ^ 𝔽(2^m)
            | CurveFP  CurvePrime  -- ^ 𝔽p
            deriving (Show,Read,Eq,Data,Typeable)
 
--- | Define a point on a curve
+-- | Define a point on a curve.
 data Point = Point Integer Integer
-           | PointO
+           | PointO -- ^ Point at Infinity
            deriving (Show,Read,Eq,Data,Typeable)
 
--- | Define an elliptic curve in 𝔽(2^m)
--- The first parameter is a bitfield representing the
--- f(x) polynomial.
+-- | Define an elliptic curve in 𝔽(2^m).
+-- The firt parameter is the Integer representatioin of the irreducible polynomial f(x).
 data CurveBinary = CurveBinary Integer CurveCommon
     deriving (Show,Read,Eq,Data,Typeable)
 
--- | Define an elliptic curve in 𝔽p
---
--- the first parameter is a prime number
+-- | Define an elliptic curve in 𝔽p.
+-- The first parameter is the Prime Number.
 data CurvePrime = CurvePrime Integer CurveCommon
     deriving (Show,Read,Eq,Data,Typeable)
 
+-- | Parameters in common between binary and prime curves.
 common_curve :: Curve -> CurveCommon
 common_curve (CurveF2m (CurveBinary _ cc)) = cc
 common_curve (CurveFP  (CurvePrime  _ cc)) = cc
 
--- | Polynomial representing the characteristic of a CurveBinary.
+-- | Irreducible polynomial representing the characteristic of a CurveBinary.
 ecc_fx :: CurveBinary -> Integer
 ecc_fx (CurveBinary fx _) = fx
 
@@ -57,7 +56,7 @@ ecc_p :: CurvePrime -> Integer
 ecc_p (CurvePrime p _) = p
 
 -- | Define common parameters in a curve definition
--- of the form: y^2 = x^3 + ax + b
+-- of the form: y^2 = x^3 + ax + b.
 data CurveCommon = CurveCommon
     { ecc_a :: Integer -- ^ curve parameter a
     , ecc_b :: Integer -- ^ curve parameter b
@@ -66,7 +65,7 @@ data CurveCommon = CurveCommon
     , ecc_h :: Integer -- ^ cofactor
     } deriving (Show,Read,Eq,Data,Typeable)
 
--- | Define names for known recommended curves
+-- | Define names for known recommended curves.
 data CurveName =
       SEC_p112r1
     | SEC_p112r2
@@ -103,7 +102,7 @@ data CurveName =
     | SEC_t571r1
     deriving (Show,Eq,Ord,Enum)
 
--- | get the curve definition associated with a recommended known curve name.
+-- | Get the curve definition associated with a recommended known curve name.
 getCurveByName :: CurveName -> Curve
 getCurveByName SEC_p112r1 = CurveFP  $ CurvePrime
     0xdb7c2abf62e35e668076bead208b
