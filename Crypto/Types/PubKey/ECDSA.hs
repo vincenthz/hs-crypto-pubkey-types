@@ -44,6 +44,7 @@ data PublicKey = PublicKey
     , public_q     :: PublicPoint
     } deriving (Show,Read,Eq,Data,Typeable)
 
+-- | ECDSA Key Pair.
 data KeyPair = KeyPair Curve PublicPoint PrivateNumber
     deriving (Show,Read,Eq,Data,Typeable)
 
