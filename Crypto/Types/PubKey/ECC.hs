@@ -21,6 +21,8 @@ module Crypto.Types.PubKey.ECC
     ) where
 
 import Data.Data
+import Data.Tuple (swap)
+import Data.ASN1.OID
 
 -- | Define either a binary curve or a prime curve.
 data Curve = CurveF2m CurveBinary -- ^ 𝔽(2^m)
@@ -41,6 +43,7 @@ data CurveBinary = CurveBinary Integer CurveCommon
 -- The first parameter is the Prime Number.
 data CurvePrime = CurvePrime Integer CurveCommon
     deriving (Show,Read,Eq,Data,Typeable)
+
 
 -- | Parameters in common between binary and prime curves.
 common_curve :: Curve -> CurveCommon
@@ -75,11 +78,11 @@ data CurveName =
     | SEC_p160r1
     | SEC_p160r2
     | SEC_p192k1
-    | SEC_p192r1
+    | SEC_p192r1 -- aka prime192v1
     | SEC_p224k1
     | SEC_p224r1
     | SEC_p256k1
-    | SEC_p256r1
+    | SEC_p256r1 -- aka prime256v1
     | SEC_p384r1
     | SEC_p521r1
     | SEC_t113r1
@@ -91,7 +94,7 @@ data CurveName =
     | SEC_t163r2
     | SEC_t193r1
     | SEC_t193r2
-    | SEC_t233k1
+    | SEC_t233k1 -- aka NIST K-233
     | SEC_t233r1
     | SEC_t239k1
     | SEC_t283k1
@@ -101,6 +104,51 @@ data CurveName =
     | SEC_t571k1
     | SEC_t571r1
     deriving (Show,Eq,Ord,Enum)
+
+curvesOIDs :: [ (CurveName, OID) ]
+curvesOIDs =
+    [ (SEC_p112r1, [1,3,132,0,6])
+    , (SEC_p112r2, [1,3,132,0,7])
+    , (SEC_p128r1, [1,3,132,0,28])
+    , (SEC_p128r2, [1,3,132,0,29])
+    , (SEC_p160k1, [1,3,132,0,9])
+    , (SEC_p160r1, [1,3,132,0,8])
+    , (SEC_p160r2, [1,3,132,0,30])
+    , (SEC_p192k1, [1,3,132,0,31])
+    , (SEC_p192r1, [1,2,840,10045,3,1,1,1])
+    , (SEC_p224k1, [1,3,132,0,32])
+    , (SEC_p224r1, [1,3,132,0,33])
+    , (SEC_p256k1, [1,3,132,0,10])
+    , (SEC_p256r1, [1,2,840,10045,3,1,1,7])
+    , (SEC_p384r1, [1,3,132,0,34])
+    , (SEC_p521r1, [1,3,132,0,35])
+    , (SEC_t113r1, [1,3,132,0,4])
+    , (SEC_t113r2, [1,3,132,0,5])
+    , (SEC_t131r1, [1,3,132,0,22])
+    , (SEC_t131r2, [1,3,132,0,23])
+    , (SEC_t163k1, [1,3,132,0,1])
+    , (SEC_t163r1, [1,3,132,0,2])
+    , (SEC_t163r2, [1,3,132,0,15])
+    , (SEC_t193r1, [1,3,132,0,24])
+    , (SEC_t193r2, [1,3,132,0,25])
+    , (SEC_t233k1, [1,3,132,0,26])
+    , (SEC_t233r1, [1,3,132,0,27])
+    , (SEC_t239k1, [1,3,132,0,3])
+    , (SEC_t283k1, [1,3,132,0,16])
+    , (SEC_t283r1, [1,3,132,0,17])
+    , (SEC_t409k1, [1,3,132,0,36])
+    , (SEC_t409r1, [1,3,132,0,37])
+    , (SEC_t571k1, [1,3,132,0,38])
+    , (SEC_t571r1, [1,3,132,0,39])
+    ]
+
+
+instance OIDable CurveName where
+    getObjectID cn = maybe (error ("no oid for: " ++ show cn)) id $ lookup cn curvesOIDs
+
+instance OIDNameable CurveName where
+    fromObjectID oid = lookupSnd oid curvesOIDs
+      where lookupSnd x = lookup x . map swap
 
 -- | Get the curve definition associated with a recommended known curve name.
 getCurveByName :: CurveName -> Curve
