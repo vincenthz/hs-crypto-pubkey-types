@@ -6,6 +6,9 @@
 -- Stability   : Experimental
 -- Portability : Excellent
 --
+-- references:
+--   <https://tools.ietf.org/html/rfc5915>
+--
 module Crypto.Types.PubKey.ECC
     ( Curve(..)
     , Point(..)

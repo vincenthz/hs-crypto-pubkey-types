@@ -6,6 +6,10 @@
 -- Stability   : Experimental
 -- Portability : Excellent
 --
+-- references:
+--   <https://tools.ietf.org/html/rfc5915>
+--   <https://tools.ietf.org/html/rfc6979>
+--
 module Crypto.Types.PubKey.ECDSA
     ( Signature(..)
     , PublicPoint

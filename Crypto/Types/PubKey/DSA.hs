@@ -6,6 +6,9 @@
 -- Stability   : Stable
 -- Portability : Excellent
 --
+-- references:
+--   <https://tools.ietf.org/html/rfc6979>
+--
 module Crypto.Types.PubKey.DSA
     ( Params(..)
     , Signature(..)
