@@ -106,7 +106,7 @@ data CurveName =
     | SEC_t409r1
     | SEC_t571k1
     | SEC_t571r1
-    deriving (Show,Eq,Ord,Enum)
+    deriving (Show,Read,Eq,Ord,Enum,Data,Typeable)
 
 curvesOIDs :: [ (CurveName, OID) ]
 curvesOIDs =
