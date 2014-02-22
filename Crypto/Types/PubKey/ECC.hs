@@ -12,6 +12,8 @@
 module Crypto.Types.PubKey.ECC
     ( Curve(..)
     , Point(..)
+    , PublicPoint
+    , PrivateNumber
     , CurveBinary(..)
     , CurvePrime(..)
     , common_curve
@@ -32,6 +34,12 @@ data Curve = CurveF2m CurveBinary -- ^ 𝔽(2^m)
            | CurveFP  CurvePrime  -- ^ 𝔽p
            deriving (Show,Read,Eq,Data,Typeable)
 
+-- | ECC Public Point
+type PublicPoint = Point
+
+-- | ECC Private Number
+type PrivateNumber = Integer
+
 -- | Define a point on a curve.
 data Point = Point Integer Integer
            | PointO -- ^ Point at Infinity
@@ -46,7 +54,6 @@ data CurveBinary = CurveBinary Integer CurveCommon
 -- The first parameter is the Prime Number.
 data CurvePrime = CurvePrime Integer CurveCommon
     deriving (Show,Read,Eq,Data,Typeable)
-
 
 -- | Parameters in common between binary and prime curves.
 common_curve :: Curve -> CurveCommon
@@ -144,7 +151,6 @@ curvesOIDs =
     , (SEC_t571k1, [1,3,132,0,38])
     , (SEC_t571r1, [1,3,132,0,39])
     ]
-
 
 instance OIDable CurveName where
     getObjectID cn = maybe (error ("no oid for: " ++ show cn)) id $ lookup cn curvesOIDs

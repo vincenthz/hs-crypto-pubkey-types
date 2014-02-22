@@ -24,12 +24,6 @@ module Crypto.Types.PubKey.ECDSA
 import Crypto.Types.PubKey.ECC
 import Data.Data
 
--- | ECDSA Public Point, usually embedded in ECDSA Public Key.
-type PublicPoint = Point
-
--- | ECDSA Private Number, usually embedded in ECDSA Private Key.
-type PrivateNumber = Integer
-
 -- | Represent a ECDSA signature namely R and S.
 data Signature = Signature
     { sign_r :: Integer -- ^ ECDSA r
