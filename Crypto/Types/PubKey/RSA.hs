@@ -18,6 +18,8 @@ module Crypto.Types.PubKey.RSA
 
 import Data.Data
 import Data.ASN1.Types
+import Data.Bits (shiftL, shiftR, complement, testBit, (.&.))
+import Data.Word (Word8)
 
 -- | Represent a RSA public key
 data PublicKey = PublicKey
@@ -32,13 +34,16 @@ instance ASN1Object PublicKey where
                          : IntVal (public_e pubKey)
                          : End Sequence
                          : xs
-    fromASN1 (Start Sequence:IntVal modulus:IntVal pubexp:End Sequence:xs) =
+    fromASN1 (Start Sequence:IntVal smodulus:IntVal pubexp:End Sequence:xs) =
         Right (PublicKey { public_size = calculate_modulus modulus 1
                          , public_n    = modulus
                          , public_e    = pubexp
                          }
               , xs)
         where calculate_modulus n i = if (2 ^ (i * 8)) > n then i else calculate_modulus n (i+1)
+              -- some bad implementation will not serialize ASN.1 integer properly, leading
+              -- to negative modulus. if that's the case, we correct it.
+              modulus = toPositive smodulus
     fromASN1 _ =
         Left "fromASN1: RSA.PublicKey: unexpected format"
 
@@ -130,3 +135,16 @@ toPublicKey (KeyPair priv) = private_pub priv
 -- | Private key of a RSA KeyPair
 toPrivateKey :: KeyPair -> PrivateKey
 toPrivateKey (KeyPair priv) = priv
+
+toPositive :: Integer -> Integer
+toPositive int
+    | int < 0   = uintOfBytes $ bytesOfInt int
+    | otherwise = int
+  where uintOfBytes = foldl (\acc n -> (acc `shiftL` 8) + fromIntegral n) 0
+        bytesOfInt :: Integer -> [Word8]
+        bytesOfInt n = if testBit (head nints) 7 then nints else 0xff : nints
+          where nints = reverse $ plusOne $ reverse $ map complement $ bytesOfUInt (abs n)
+                plusOne []     = [1]
+                plusOne (x:xs) = if x == 0xff then 0 : plusOne xs else (x+1) : xs
+                bytesOfUInt x = reverse (list x)
+                  where list i = if i <= 0xff then [fromIntegral i] else (fromIntegral i .&. 0xff) : list (i `shiftR` 8)
