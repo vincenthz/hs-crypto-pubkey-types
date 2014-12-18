@@ -18,6 +18,8 @@ module Crypto.Types.PubKey.RSA
 
 import Data.Data
 import Data.ASN1.Types
+import Data.ASN1.BinaryEncoding (BER(BER))
+import Data.ASN1.Encoding (decodeASN1')
 import Data.Bits (shiftL, shiftR, complement, testBit, (.&.))
 import Data.Word (Word8)
 
@@ -44,6 +46,18 @@ instance ASN1Object PublicKey where
               -- some bad implementation will not serialize ASN.1 integer properly, leading
               -- to negative modulus. if that's the case, we correct it.
               modulus = toPositive smodulus
+    fromASN1 ( Start Sequence
+             : IntVal 0
+             : Start Sequence
+             : OID [1, 2, 840, 113549, 1, 1, 1]
+             : Null
+             : End Sequence
+             : OctetString bs
+             : xs
+             ) = let inner = either strError fromASN1 $ decodeASN1' BER bs
+                     strError = Left .
+                                ("fromASN1: RSA.PublicKey: " ++) . show
+                 in either Left (\(k, _) -> Right (k, xs)) inner
     fromASN1 _ =
         Left "fromASN1: RSA.PublicKey: unexpected format"
 
@@ -115,6 +129,18 @@ instance ASN1Object PrivateKey where
                         , private_qinv = pcoef
                         }
 
+    fromASN1 ( Start Sequence
+             : IntVal 0
+             : Start Sequence
+             : OID [1, 2, 840, 113549, 1, 1, 1]
+             : Null
+             : End Sequence
+             : OctetString bs
+             : xs
+             ) = let inner = either strError fromASN1 $ decodeASN1' BER bs
+                     strError = Left .
+                                ("fromASN1: RSA.PrivateKey: " ++) . show
+                 in either Left (\(k, _) -> Right (k, xs)) inner
     fromASN1 _ =
         Left "fromASN1: RSA.PrivateKey: unexpected format"
 

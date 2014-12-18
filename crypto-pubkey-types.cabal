@@ -20,6 +20,7 @@ Library
                      Crypto.Types.PubKey.ECDSA
   Build-depends:     base >= 4 && < 5
                    , asn1-types >= 0.1 && < 0.4
+                   , asn1-encoding
 
 source-repository head
   type:     git
