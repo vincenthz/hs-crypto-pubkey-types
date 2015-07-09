@@ -23,6 +23,10 @@ module Crypto.Types.PubKey.DSA
 
 import Data.Data
 import Data.ASN1.Types
+import Data.ASN1.Encoding
+import Data.ASN1.BinaryEncoding
+import qualified Data.ByteString.Lazy as BL (toStrict)
+import Data.ASN1.BitArray
 
 -- | DSA Public Number, usually embedded in DSA Public Key
 type PublicNumber = Integer
