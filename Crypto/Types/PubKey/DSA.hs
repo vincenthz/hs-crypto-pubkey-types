@@ -75,13 +75,20 @@ data PublicKey = PublicKey
 -- number together.
 instance ASN1Object PublicKey where
     toASN1 pubKey = \xs -> Start Sequence
-                         : IntVal (params_p params)
-                         : IntVal (params_q params)
-                         : IntVal (params_g params)
+                         :   Start Sequence
+                         :     OID [1,2,840,10040,4,1]
+                         :     Start Sequence
+                         :       IntVal (params_p params)
+                         :       IntVal (params_q params)
+                         :       IntVal (params_g params)
+                         :     End Sequence
+                         :   End Sequence
+                         :   BitString (BitArray 0 yBytes)
                          : End Sequence
-                         : IntVal (public_y pubKey)
                          : xs
         where params = public_params pubKey
+              yBytes = BL.toStrict $ encodeASN1 DER [ IntVal $ public_y pubKey ]
+
     fromASN1 l = case fromASN1 l of
                     Left err -> Left err
                     Right (dsaParams, ls) -> case ls of
