@@ -23,6 +23,10 @@ module Crypto.Types.PubKey.DSA
 
 import Data.Data
 import Data.ASN1.Types
+import Data.ASN1.Encoding
+import Data.ASN1.BinaryEncoding
+import qualified Data.ByteString.Lazy as BL (toStrict)
+import Data.ASN1.BitArray
 
 -- | DSA Public Number, usually embedded in DSA Public Key
 type PublicNumber = Integer
@@ -75,13 +79,20 @@ data PublicKey = PublicKey
 -- number together.
 instance ASN1Object PublicKey where
     toASN1 pubKey = \xs -> Start Sequence
-                         : IntVal (params_p params)
-                         : IntVal (params_q params)
-                         : IntVal (params_g params)
+                         :   Start Sequence
+                         :     OID [1,2,840,10040,4,1]
+                         :     Start Sequence
+                         :       IntVal (params_p params)
+                         :       IntVal (params_q params)
+                         :       IntVal (params_g params)
+                         :     End Sequence
+                         :   End Sequence
+                         :   BitString (BitArray 0 yBytes)
                          : End Sequence
-                         : IntVal (public_y pubKey)
                          : xs
         where params = public_params pubKey
+              yBytes = BL.toStrict $ encodeASN1 DER [ IntVal $ public_y pubKey ]
+
     fromASN1 l = case fromASN1 l of
                     Left err -> Left err
                     Right (dsaParams, ls) -> case ls of
